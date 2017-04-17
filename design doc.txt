@@ -1,0 +1,34 @@
+
+Preprocessing - 
+
+Time taken to preprocess the files is reutilized by saving the data structures thus made in memory and reading from them.
+Time reduction seen is approximately 40 times. In the preprocessing itself a hash was maintained where there was a mapping 
+from all english words to relevant french words to reduce the memory consumption during the Model implementaion part.
+
+Algorithm :-
+
+The primary Algorithm used for the translation part is that of the IBM Model 1 with EM with modifications.
+If a simple matrix would have been made from the english and french dictionaries for "count" and "t" matrices 
+then the overall memory requirement would have been 380 GB. We changed that matrix to a vector of variable 
+size vectors. This was done after the observation that t and count remained zero for all english french word 
+pairs where there was no correspondence i.e. if there is no sentence pair where "the" and "buch" are present
+together the t and count values will both remain zero throughout. Thus by doing this optimization we were 
+able to bring the memory required to approximately 3 GB. 
+
+
+The time taken by one iteration to complete was approximately 2500 seconds
+
+The parts of cosine similarity and Jacard coefficients have been added as it is.
+
+/*****************************************************************************************************/
+
+Made a hash table from all the strings from the documents in parallel corpus.
+
+Hash table was used to increase the speed and decrease the size in memory from approximately 40 bytes to 8 bytes. The benifit
+that less memory accesses will be required to the job.
+
+
+/*****************************************************************************************************/
+
+C++ STL was used to provide auxillary data structures such as map, vector, pair etc..
+openmp - used to provide parallelization at different points and to increase the overall resource utilization of a multi-core system
